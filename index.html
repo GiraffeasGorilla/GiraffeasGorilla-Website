@@ -11,62 +11,146 @@ body{background-image:url('https://backiee.com/static/wallpapers/560x315/298793.
   <meta property="og:title" content="GiraffeasGorilla • links" />
   <meta property="og:description" content="links" />
   <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#0ea5e9" />
+  <meta name="theme-color" content="#f97316" />
   <style>
     :root{
       --bg: #0b1020;
-      --panel: #11162a;
-      --text: #e6edf3;
-      --muted: #9aa7b3;
-      --brand: #0ea5e9;
-      --accent: #22c55e;
-      --ring: #38bdf8;
+      --glass-bg: rgba(20, 15, 10, 0.45);
+      --glass-border: rgba(255, 255, 255, 0.12);
+      --glass-highlight: rgba(255, 255, 255, 0.08);
+      --text: #fff5e6;
+      --muted: #d1d5db;
+      --brand: #f97316;
+      --brand-hover: #ea580c;
+      --accent: #fb923c;
+      --ring: #fdba74;
     }
     @media (prefers-color-scheme: light){
       :root{
-        --bg: #f8fafc;
-        --panel: #ffffff;
-        --text: #0f172a;
-        --muted: #475569;
-        --brand: #0284c7;
-        --accent: #16a34a;
-        --ring: #38bdf8;
+        --glass-bg: rgba(255, 255, 255, 0.35);
+        --glass-border: rgba(255, 255, 255, 0.6);
+        --glass-highlight: rgba(255, 255, 255, 0.4);
+        --text: #431407;
+        --muted: #78350f;
+        --brand: #f97316;
+        --brand-hover: #c2410c;
+        --accent: #fb923c;
+        --ring: #fdba74;
       }
     }
     *{box-sizing:border-box}
     html,body{margin:0;height:100%;font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, "Noto Sans"}
-    body{color:var(--text);line-height:1.6;overflow-x:hidden;}
-    a{color:var(--brand);text-decoration:none;transition:color .2s}
-    a:hover{text-decoration:underline;color:var(--accent)}
+    
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(249, 115, 22, 0.15), transparent 70%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    body{color:var(--text);line-height:1.6;overflow-x:hidden;background:transparent;}
+    a{color:var(--brand);text-decoration:none;transition:all .2s}
+    a:hover{text-decoration:underline;color:var(--brand-hover)}
+    
     .wrap{max-width:1100px;margin-inline:auto;padding:28px;}
-    header{display:flex;align-items:center;justify-content:space-between;gap:16px;animation:fadeDown .6s ease-out}
-    .logo{font-weight:800;letter-spacing:.3px;font-size:20px}
+    
+    /* Glass Header */
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;animation:fadeDown .6s ease-out;
+           padding: 12px 20px;
+           border-radius: 16px;
+           background: var(--glass-bg);
+           backdrop-filter: blur(12px);
+           -webkit-backdrop-filter: blur(12px);
+           border: 1px solid var(--glass-border);
+           position: sticky;
+           top: 20px;
+           z-index: 100;
+           margin-bottom: 20px;
+    }
+    .logo{font-weight:800;letter-spacing:.3px;font-size:20px; text-shadow: 0 2px 4px rgba(0,0,0,0.2);}
     nav{display:flex;gap:14px;flex-wrap:wrap}
-    nav a{padding:8px 12px;border-radius:12px;background:var(--panel);border:1px solid color-mix(in oklab, var(--ring) 30%, transparent);transition:transform .2s}
-    nav a:hover{transform:translateY(-2px)}
-    .hero{margin-top:40px;padding:40px;border:1px solid color-mix(in oklab, var(--ring) 35%, transparent);background:linear-gradient(180deg, color-mix(in oklab, var(--panel) 90%, transparent), color-mix(in oklab, var(--panel) 100%, black));border-radius:20px;display:grid;grid-template-columns:1.3fr 1fr;gap:22px;animation:fadeUp .8s ease-out}
+    
+    /* Glass Nav Items */
+    nav a{padding:8px 16px;border-radius:12px;
+          background: var(--glass-highlight);
+          border: 1px solid var(--glass-border);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          transition:transform .2s, background .2s;
+          color: var(--text);
+          font-weight: 500;
+    }
+    nav a:hover{transform:translateY(-2px); background: var(--brand); color: white; border-color: var(--brand); text-decoration: none;}
+    
+ 
+    .hero{margin-top:40px;padding:40px;border-radius:24px;
+          background: var(--glass-bg);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1px solid var(--glass-border);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+          display:grid;grid-template-columns:1.3fr 1fr;gap:22px;animation:fadeUp .8s ease-out}
     @media (max-width:860px){.hero{grid-template-columns:1fr}}
-    .hero h1{margin:0;font-size:clamp(28px,4vw,44px);line-height:1.1}
+    
+    .hero h1{margin:0;font-size:clamp(28px,4vw,44px);line-height:1.1; text-shadow: 0 2px 8px rgba(0,0,0,0.3);}
+    .hero p { font-size: 1.1rem; color: var(--muted); margin-top: 10px; }
+    
     .pillz{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
-    .pill{font-size:12px;border:1px solid color-mix(in oklab, var(--ring) 35%, transparent);padding:6px 10px;border-radius:999px;background:color-mix(in oklab, var(--panel) 80%, transparent);animation:fadeUp .8s ease-out .2s both}
+    .pill{font-size:12px;border:1px solid var(--glass-border);padding:6px 14px;border-radius:999px;
+          background: rgba(255,255,255,0.1);
+          backdrop-filter: blur(4px);
+          -webkit-backdrop-filter: blur(4px);
+          color: var(--text);
+          animation:fadeUp .8s ease-out .2s both}
+    
     .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;font-weight:600;border:1px solid color-mix(in oklab, var(--ring) 40%, transparent);background:var(--brand);color:white;text-decoration:none;transition:transform .2s, background .2s}
-    .btn:hover{transform:translateY(-2px);background:var(--accent)}
-    .btn.secondary{background:transparent;color:var(--text)}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:16px;font-weight:600;
+         border: 1px solid var(--glass-border);
+         background: var(--brand); 
+         color: white; 
+         text-decoration:none; 
+         transition:transform .2s, background .2s, box-shadow .2s;
+         backdrop-filter: blur(4px);
+         box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+    }
+    .btn:hover{transform:translateY(-2px);background:var(--brand-hover); text-decoration: none; box-shadow: 0 6px 16px rgba(249, 115, 22, 0.5);}
+    
+    .btn.secondary{background:rgba(255,255,255,0.1); color:var(--text); box-shadow: none;}
+    .btn.secondary:hover{background:rgba(255,255,255,0.2); color: var(--text); border-color: var(--ring);}
+    
     .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px}
     @media (max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}}
     @media (max-width:640px){.grid{grid-template-columns:1fr}}
 
-   
-    .card{padding:32px;border-radius:18px;border:1px solid color-mix(in oklab, var(--ring) 30%, transparent);background:var(--panel);animation:fadeUp .8s ease-out}
-    .card.small{padding:18px;} 
 
-    .card h3{margin:0 0 12px;font-size:20px}
-    .card p{margin:0 0 16px;color:var(--muted)}
-    .badge{display:inline-flex;align-items:center;gap:6px;background:color-mix(in oklab, var(--accent) 18%, var(--panel));border:1px solid color-mix(in oklab, var(--accent) 55%, transparent);padding:6px 10px;border-radius:999px;font-size:12px}
+    .card{padding:32px;border-radius:20px;
+          background: var(--glass-bg);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border: 1px solid var(--glass-border);
+          transition: transform 0.3s, box-shadow 0.3s;
+          animation:fadeUp .8s ease-out}
+    .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        border-color: var(--ring);
+    }
+    .card.small{padding:24px;} 
+
+    .card h3{margin:0 0 12px;font-size:20px; color: var(--text);}
+    .card p{margin:0 0 16px;color:var(--muted);}
+    
+    .badge{display:inline-flex;align-items:center;gap:6px;background:rgba(251, 146, 60, 0.2);
+           border:1px solid rgba(251, 146, 60, 0.6);
+           padding:6px 12px;border-radius:999px;font-size:12px; color: #fff; font-weight: 600;}
+    
     .split{display:grid;grid-template-columns:1fr 1fr;gap:18px}
     @media (max-width:860px){.split{grid-template-columns:1fr}}
-    footer{margin-top:40px;padding-top:16px;border-top:1px dashed color-mix(in oklab, var(--ring) 30%, transparent);color:var(--muted);text-align:center;animation:fadeUp .8s ease-out}
+    
+    footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--glass-border);color:var(--muted);text-align:center;animation:fadeUp .8s ease-out; background: var(--glass-bg); backdrop-filter: blur(8px); border-radius: 16px; padding-bottom: 20px;}
 
     @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
     @keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
@@ -84,59 +168,59 @@ body{background-image:url('https://backiee.com/static/wallpapers/560x315/298793.
 
     <section class="hero" id="home">
       <div>
-        <h1></h1>
-        <p></p>
+        <h1>GiraffeasGorilla</h1>
+        <p>Gorilla Tag Animation Creator & Game Developer</p>
         <div class="pillz">
-          <span class="pill"></span>
-          <span class="pill"></span>
+          <span class="pill">Animation</span>
+          <span class="pill">Game Design</span>
         </div>
         <div class="cta">
           <a class="btn" href="#projects">View Projects</a>
           <a class="btn secondary" href="#contact">Contact</a>
         </div>
       </div>
-      <div class="card small"> <!-- Keep small -->
+      <div class="card small"> 
         <div class="badge">Featured Project</div>
         <p style="margin-top:12px">Planet Inc. a new game thats not out yet...</p>
       </div>
     </section>
 
     <section id="projects" class="grid">
-      <article class="card small"> <!-- Keep small -->
+      <article class="card small"> 
         <h3>Planet Inc.</h3>
-        <p>...</p>
-        <a class="btn secondary" href="https://sites.google.com/view/planet-inc/home" target="_blank" rel="noopener">unknown</a>
+        <p>An upcoming game experience...</p>
+        <a class="btn secondary" href="https://sites.google.com/view/planet-inc/home" target="_blank" rel="noopener">View Site</a>
       </article>
 
       <article class="card">
         <h3>Forest but it spins</h3>
-        <p>a gtag map i made</p>
-        <a class="btn secondary" href="https://mod.io/g/gorilla-tag/m/forest-but-it-spins?preview=1e2e307cd049f2cee42c373525ab07c1" target="_blank" rel="noopener">mod.io</a>
+        <p>A chaotic Gorilla Tag map I created.</p>
+        <a class="btn secondary" href="https://mod.io/g/gorilla-tag/m/forest-but-it-spins?preview=1e2e307cd049f2cee42c373525ab07c1" target="_blank" rel="noopener">Download Map</a>
       </article>
     </section>
 
     <section id="links" class="grid">
       <article class="card">
         <h3>GitHub</h3>
-        <p>Code and projects.</p>
-        <a class="btn secondary" href="https://github.com/GiraffeasGorilla" target="_blank" rel="noopener">Open</a>
+        <p>Code and open source projects.</p>
+        <a class="btn secondary" href="https://github.com/GiraffeasGorilla" target="_blank" rel="noopener">Open GitHub</a>
       </article>
       <article class="card">
         <h3>YouTube</h3>
-        <p>Animations and stuffs.</p>
-        <a class="btn secondary" href="https://www.youtube.com/@OFFICIALGiraffeasgorilla" target="_blank" rel="noopener">Watch</a>
+        <p>Animations and content.</p>
+        <a class="btn secondary" href="https://www.youtube.com/@OFFICIALGiraffeasgorilla" target="_blank" rel="noopener">Watch Videos</a>
       </article>
       <article class="card">
         <h3>Roblox</h3>
-        <p>Games ive made</p>
-        <a class="btn secondary" href="https://www.roblox.com/users/1095720641/profile" target="_blank" rel="noopener">Profile</a>
+        <p>Games I've built.</p>
+        <a class="btn secondary" href="https://www.roblox.com/users/1095720641/profile" target="_blank" rel="noopener">View Profile</a>
       </article>
     </section>
 
     <section id="contact" class="split">
       <div class="card">
         <h3>Contact Me</h3>
-        <p><a href="mailto:‎myStitch14@​yahoo.com">📧 Send me an email</a></p>
+        <p><a href="mailto:myStitch14@yahoo.com" style="color: var(--brand); font-weight: bold;">📧 myStitch14@yahoo.com</a></p>
       </div>
     </section>
   </div>
